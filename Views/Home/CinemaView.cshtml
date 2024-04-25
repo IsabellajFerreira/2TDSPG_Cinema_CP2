@@ -1,0 +1,60 @@
+﻿@model List<_2TDSPG_Cinema.Models.Sessao>
+@{
+    ViewData["Title"] = "Cinema";
+}
+
+<h2>Bem-vindo ao Cinema</h2>
+
+<p>Aqui você pode encontrar informações sobre sessões disponíveis, reservar ingressos e muito mais!</p>
+
+<div class="text-center">
+    <h1 class="display-4">Veja abaixo as sessões disponíveis:</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título do Filme</th>
+                <th>Diretor</th>
+                <th>Horário</th>
+                <th>Ingressos Disponíveis</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sessao in (Model ?? new List<_2TDSPG_Cinema.Models.Sessao>()))
+            {
+                <tr>
+                    <td>@sessao.Filme.Titulo</td>
+                    <td>@sessao.Filme.Diretor</td>
+                    <td>@sessao.Horario.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@sessao.IngressosDisponiveis</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h2>Adicionar Nova Sessão:</h2>
+    <form asp-controller="Cinema" asp-action="AdicionarSessao" method="post">
+        <div class="form-group">
+            <label for="titulo">Título do Filme:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo">
+        </div>
+        <div class="form-group">
+            <label for="diretor">Diretor:</label>
+            <input type="text" class="form-control" id="diretor" name="diretor">
+        </div>
+        <div class="form-group">
+            <label for="horario">Horário:</label>
+            <input type="datetime-local" class="form-control" id="horario" name="horario">
+        </div>
+        <div class="form-group">
+            <label for="ingressos">Ingressos Disponíveis:</label>
+            <input type="number" class="form-control" id="ingressos" name="ingressos">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Sessão</button>
+    </form>
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+
+</div>
