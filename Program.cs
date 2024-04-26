@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using _2TDSPG_Cinema.Data;
+using FluentAssertions.Common;
+
 
 
 namespace _2TDSPG_Cinema
@@ -14,8 +16,8 @@ namespace _2TDSPG_Cinema
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            services.AddDbContext<DataContext>(options =>
-                options.UseOracle(Configuration.GetConnectionString("OraDbConnection")));
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseOracle("Password=180105;Persist Security Info=True;User ID=sa;Initial Catalog=DepartApp;Data Source=DESKTOP-BFHMBTJ;TrustServerCertificate=True"));
 
             var app = builder.Build();
 
