@@ -1,3 +1,8 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using _2TDSPG_Cinema.Data;
+
+
 namespace _2TDSPG_Cinema
 {
     public class Program
@@ -8,6 +13,9 @@ namespace _2TDSPG_Cinema
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            services.AddDbContext<DataContext>(options =>
+                options.UseOracle(Configuration.GetConnectionString("OraDbConnection")));
 
             var app = builder.Build();
 
