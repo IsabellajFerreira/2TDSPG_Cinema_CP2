@@ -6,7 +6,7 @@
         public string Titulo { get; set; }
         public string Diretor { get; set; }
         public int Duracao { get; set; }
-        public List<Sessao> Sessoes { get; set; }
+        public List<Sessao> Sessoes { get; set; } // Um filme pode estar em varias sessões
 
         public Filme(string titulo, string diretor, int duracao)
         {

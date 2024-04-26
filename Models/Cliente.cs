@@ -6,7 +6,7 @@
         public int Idade { get; set; }
         public string Endereco { get; set; }
         public int NumeroCliente { get; set; }
-        internal Reserva Reserva { get; set; }
+        internal Reserva Reserva { get; set; } // Cliente pode ter no máximo uma reserva
 
         public Cliente(string nome, int idade, string endereco, int numeroCliente)
         {

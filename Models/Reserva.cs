@@ -1,10 +1,22 @@
-﻿namespace _2TDSPG_Cinema.Models
+﻿using System.Collections.Generic;
+
+namespace _2TDSPG_Cinema.Models
 {
-    public class Reserva : Ingresso
+    public class Reserva
     {
-        public Reserva(Sessao sessao, Cliente cliente) : base(sessao, cliente)
+
+        public Cliente Cliente { get; set; } // Uma reserva pertence a um cliente
+
+        public List<Ingresso> Ingressos { get; set; }  // uma reserva pode ter varios ingressosx
+        public Reserva(Cliente cliente)
         {
+            Cliente = cliente;
+            Ingressos = new List<Ingresso>();
+
         }
 
     }
 }
+
+    
+

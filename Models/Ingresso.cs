@@ -2,13 +2,13 @@
 {
     public class Ingresso
     {
-        public Sessao Sessao { get; set; }
-        public Cliente Cliente { get; set; }
+        public Reserva Reserva { get; set; } // Um ingresso está associado a uma reserva
+        public Sessao Sessao { get; set; }  // Um ingresso está associado a uma sessao
 
-        public Ingresso(Sessao sessao, Cliente cliente)
+        public Ingresso(Reserva reserva, Sessao sessao)
         {
+            Reserva = reserva;
             Sessao = sessao;
-            Cliente = cliente;
         }
     }
 }

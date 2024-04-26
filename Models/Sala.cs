@@ -4,7 +4,7 @@
     {
         public int Numero { get; set; }
         public int Capacidade { get; set; }
-        public List<Sessao> Sessoes { get; set; }
+        public List<Sessao> Sessoes { get; set; } // Uma sala pode ter várias sessões
 
         public Sala(int numero, int capacidade)
         {

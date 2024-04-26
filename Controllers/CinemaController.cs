@@ -16,19 +16,18 @@ namespace _2TDSPG_Cinema.Controllers
 
         public IActionResult Index()
         {
-            return View("~/Views/Home/Index.cshtml", sessoes);
+            return View(sessoes);
         }
 
-
         [HttpPost]
-        public IActionResult AdicionarSessao(string titulo, string diretor, int duracao, DateTime horario, int capacidade, int ingressosDisponiveis)
+        public IActionResult AdicionarSessao(string titulo, string diretor, int duracao, DateTime horario, int capacidade, int ingressosDisponiveis, int numeroDaSala)
         {
             Filme filme = new Filme(titulo, diretor, duracao);
-            Sessao sessao = new Sessao(filme, horario, capacidade, ingressosDisponiveis);
+            Sala sala = new Sala(numeroDaSala, capacidade);
+            Sessao sessao = new Sessao(horario, capacidade, ingressosDisponiveis, sala);
             sessoes.Add(sessao);
             TempData["Mensagem"] = "Sessão adicionada com sucesso!";
             return RedirectToAction("Index");
         }
-
     }
 }

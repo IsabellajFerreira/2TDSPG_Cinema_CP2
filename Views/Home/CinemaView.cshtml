@@ -21,12 +21,15 @@
         <tbody>
             @foreach (var sessao in (Model ?? new List<_2TDSPG_Cinema.Models.Sessao>()))
             {
-                <tr>
-                    <td>@sessao.Filme.Titulo</td>
-                    <td>@sessao.Filme.Diretor</td>
-                    <td>@sessao.Horario.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@sessao.IngressosDisponiveis</td>
-                </tr>
+                foreach (var filme in sessao.Filmes) // Iterar sobre a lista de filmes em cada sessão
+                {
+                    <tr>
+                        <td>@filme.Titulo</td>
+                        <td>@filme.Diretor</td>
+                        <td>@sessao.Horario.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@sessao.IngressosDisponiveis</td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
@@ -56,5 +59,4 @@
             @TempData["Mensagem"]
         </div>
     }
-
 </div>
