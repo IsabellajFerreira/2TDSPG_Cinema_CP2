@@ -4,6 +4,7 @@ namespace _2TDSPG_Cinema.Models
 {
     public class Sala
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "O número da sala é obrigatório.")]
         [Range(1, int.MaxValue, ErrorMessage = "O número da sala deve ser um valor positivo.")]

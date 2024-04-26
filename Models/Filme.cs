@@ -4,9 +4,13 @@ namespace _2TDSPG_Cinema.Models
 {
     public class Filme
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "O título do filme é obrigatório.")]
         public string Titulo { get; set; }
+
+        [Required(ErrorMessage = "A descricao do filme é obrigatório.")]
+        public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O diretor do filme é obrigatório.")]
         public string Diretor { get; set; }
@@ -15,6 +19,8 @@ namespace _2TDSPG_Cinema.Models
         [Range(1, int.MaxValue, ErrorMessage = "A duração do filme deve ser um valor positivo.")]
         public int Duracao { get; set; }
         public List<Sessao> Sessoes { get; set; } // Um filme pode estar em varias sessões
+
+        public Filme() { }
 
         public Filme(string titulo, string diretor, int duracao)
         {

@@ -4,10 +4,13 @@ namespace _2TDSPG_Cinema.Models
 {
     public class Reserva
     {
+        public int Id { get; set; }
 
         public Cliente Cliente { get; set; } // Uma reserva pertence a um cliente
 
         public List<Ingresso> Ingressos { get; set; }  // uma reserva pode ter varios ingressosx
+
+        public Reserva() { }
         public Reserva(Cliente cliente)
         {
             Cliente = cliente;
