@@ -6,7 +6,7 @@
         public int Idade { get; set; }
         public string Endereco { get; set; }
         public int NumeroCliente { get; set; }
-        internal List<Reserva> Reservas { get; set; }
+        internal Reserva Reserva { get; set; }
 
         public Cliente(string nome, int idade, string endereco, int numeroCliente)
         {
@@ -14,7 +14,6 @@
             Idade = idade;
             Endereco = endereco;
             NumeroCliente = numeroCliente;
-            Reservas = new List<Reserva>();
         }
 
         public override string ToString()
