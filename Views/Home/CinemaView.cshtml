@@ -11,17 +11,12 @@
         <h1 class="display-4">Veja abaixo as sessões disponíveis:</h1>
         <table class="table">
             <thead>
-                <tr>
-                    <th>Título do Filme</th>
-                    <th>Diretor</th>
-                    <th>Horário</th>
-                    <th>Ingressos Disponíveis</th>
-                </tr>
+                
             </thead>
             <tbody>
                 @foreach (var sessao in (Model ?? new List<_2TDSPG_Cinema.Models.Sessao>()))
                 {
-                    foreach (var filme in sessao.Filmes) // Iterar sobre a lista de filmes em cada sessão
+                    foreach (var filme in sessao.Filmes) 
                     {
                         <tr>
                             <td>@filme.Titulo</td>
@@ -51,8 +46,33 @@
                 <label for="ingressos">Ingressos Disponíveis:</label>
                 <input type="number" class="form-control" id="ingressos" name="ingressos">
             </div>
+          
             <button type="submit" class="btn btn-primary">Adicionar Sessão</button>
         </form>
+
+        <h2>Sessões Cadastradas:</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Título do Filme</th>
+                    <th>Diretor</th>
+                    <th>Horário</th>
+                    <th>Ingressos Disponíveis</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sessao in (Model ?? new List<_2TDSPG_Cinema.Models.Sessao>()))
+                {
+                    <tr>
+                        <td>@sessao.Filmes[0].Titulo</td>
+                        <td>@sessao.Filmes[0].Diretor</td>
+                        <td>@sessao.Horario.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@sessao.IngressosDisponiveis</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
         @if (TempData["Mensagem"] != null)
         {
             <div class="alert alert-success" role="alert">

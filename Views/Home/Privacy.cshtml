@@ -1,6 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@model List<_2TDSPG_Cinema.Models.Cliente>
+@{
+    ViewData["Title"] = "Cinema";
 }
-<h1>@ViewData["Title"]</h1>
-                                             
-<p>Use this page to detail your site's privacy policy.</p>
+<h2>Clientes</h2>
+
+<p>Aqui você pode encontrar informações sobre os clientes cadastrados:</p>
+
+<div class="text-center">
+    <h1 class="display-4">Veja abaixo os clientes cadastrados:</h1>
+    <table class="table">
+        <thead>
+            
+        </thead>
+        <tbody>
+            @foreach (var cliente in (Model ?? new List<_2TDSPG_Cinema.Models.Cliente>()))
+            {
+                <tr>
+                    <td>@cliente.Nome</td>
+                    <td>@cliente.Idade</td>
+                    <td>@cliente.NumeroCliente</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Adicionar Novo Cliente:</h2>
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome">
+        </div>
+        <div class="form-group">
+            <label for="idade">Idade:</label>
+            <input type="number" class="form-control" id="idade" name="idade">
+        </div>
+        <div class="form-group">
+            <label for="numeroCliente">Número do Cliente:</label>
+            <input type="text" class="form-control" id="numeroCliente" name="numeroCliente">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Cliente</button>
+    </form>
+
+    <h2>Clientes Cadastrados:</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Número do Cliente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in (Model ?? new List<_2TDSPG_Cinema.Models.Cliente>()))
+            {
+                <tr>
+                    <td>@cliente.Nome</td>
+                    <td>@cliente.Idade</td>
+                    <td>@cliente.NumeroCliente</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>

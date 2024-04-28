@@ -30,7 +30,6 @@ namespace _2TDSPG_Cinema.Models
         {
             Nome = nome;
             Idade = idade;
-            //Endereco = endereco;
             NumeroCliente = numeroCliente;
         }
 

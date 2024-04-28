@@ -95,5 +95,7 @@ namespace _2TDSPG_Cinema.Controllers
         {
             return _context.Sessoes.Any(e => e.Id == id);
         }
+
+
     }
 }

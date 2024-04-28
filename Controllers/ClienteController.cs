@@ -140,5 +140,7 @@ namespace _2TDSPG_Cinema.Controllers
         {
             return _context.Clientes.Any(e => e.Id == id);
         }
+
+        
     }
 }
