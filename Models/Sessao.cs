@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _2TDSPG_Cinema.Models
 {
+    [Table("2TDSPG_Tb_Sessoes")]
     public class Sessao
     {
+
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public List<Filme> Filmes { get; set; } // uma sessao pode ter varios filmes
 

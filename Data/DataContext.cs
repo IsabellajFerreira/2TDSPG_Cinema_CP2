@@ -11,6 +11,8 @@ namespace _2TDSPG_Cinema.Data
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Ingresso> Ingressos { get; set; }
         public DbSet<Sessao> Sessoes { get; set; }
+
+        public DbSet<Reserva> Reservas { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
