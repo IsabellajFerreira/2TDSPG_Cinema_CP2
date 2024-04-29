@@ -16,9 +16,7 @@ namespace _2TDSPG_Cinema.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseOracle("User Id=99708; Password=180105;DBA Privilege=SYSDBA;Data Source=localhost:1521/ORASID;");
+            optionsBuilder.UseOracle("User Id=99708; Password=180105;Data Source=localhost:1521/ORASID;");
         }
-
-
     }
 }
