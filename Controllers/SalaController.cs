@@ -16,6 +16,11 @@ namespace _2TDSPG_Cinema.Controllers
             _context = context;
         }
 
+        public IActionResult Sala()
+        {
+            return View();
+        }
+
         // GET: Sala
         public async Task<IActionResult> Index()
         {

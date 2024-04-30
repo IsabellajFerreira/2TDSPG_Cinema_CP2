@@ -19,6 +19,11 @@ namespace _2TDSPG_Cinema.Models
         public int Capacidade { get; set; }
         public List<Sessao> Sessoes { get; set; } // Uma sala pode ter várias sessões
 
+        public Sala()
+        {
+
+        }
+
         public Sala(int numero, int capacidade)
         {
             Numero = numero;
