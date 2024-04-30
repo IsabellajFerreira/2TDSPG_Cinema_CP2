@@ -1,34 +1,75 @@
-﻿@{
-    ViewData["Title"] = "Reservas";
+﻿@model List<_2TDSPG_Cinema.Models.Sala>
+@{
+    ViewData["Title"] = "Salas";
 }
-
-<div class="container">
-    <h2>Reservas Feitas:</h2>
+<h2>Bem-vindo ao Cinema</h2>
+<p>Aqui você pode encontrar informações sobre as salas disponíveis:</p>
+<div class="text-center">
     <table class="table">
         <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>Número de Ingressos</th>
-                <th>Data da Reserva</th>
-                <th>Ações</th>
-            </tr>
         </thead>
         <tbody>
-            @foreach (var reserva in (Model ?? new List<_2TDSPG_Cinema.Models.Reserva>()))
+            @foreach (var sala in (Model ?? new List<_2TDSPG_Cinema.Models.Sala>()))
             {
                 <tr>
-                    <td>@reserva.Cliente.Nome</td>
-                    <td>@reserva.Ingressos.Count</td>
-                    <td>@reserva.DataReserva.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>
-                        <a asp-action="Details" asp-controller="Reserva" asp-route-id="@reserva.Id" class="btn btn-primary">Detalhes</a>
-                        <form asp-action="Delete" asp-controller="Reserva" method="post" style="display: inline;">
-                            <input type="hidden" name="id" value="@reserva.Id" />
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta reserva?')">Excluir</button>
-                        </form>
-                    </td>
+                    <td>@sala.Numero</td>
+                    <td>@sala.Capacidade</td>
                 </tr>
             }
         </tbody>
     </table>
+    <h2>Adicionar Nova Sala:</h2>
+    <form asp-controller="Sala" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="numero">Número da Sala:</label>
+            <input type="number" class="form-control" id="numero" name="numero">
+        </div>
+        <div class="form-group">
+            <label for="capacidade">Capacidade da Sala:</label>
+            <input type="number" class="form-control" id="capacidade" name="capacidade">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Sala</button>
+    </form>
+
+    <br />
+
+    <h2>Excluir Sala:</h2>
+    <form asp-controller="Sala" asp-action="Delete" method="post">
+        <div class="form-group">
+            <label for="numeroExcluir">Número da Sala:</label>
+            <input type="number" class="form-control" id="numeroExcluir" name="numeroExcluir">
+        </div>
+        
+        <button type="submit" class="btn btn-danger">Excluir Sala</button>
+    </form>
+
+    <br />
+
+    <h2>Salas Cadastradas:</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Capacidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var sala in (Model ?? new List<_2TDSPG_Cinema.Models.Sala>()))
+            {
+                <tr>
+                    <td>@sala.Numero</td>
+                    <td>@sala.Capacidade</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
 </div>
+
+

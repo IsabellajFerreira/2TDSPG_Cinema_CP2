@@ -7,7 +7,7 @@
 <p>Aqui você pode encontrar informações sobre os clientes cadastrados:</p>
 
 <div class="text-center">
-    <h1 class="display-4">Veja abaixo os clientes cadastrados:</h1>
+    
     <table class="table">
         <thead>
             
@@ -40,6 +40,18 @@
         </div>
         <button type="submit" class="btn btn-primary">Adicionar Cliente</button>
     </form>
+    <br />
+    <h2>Excluir Cliente:</h2>
+    <form asp-action="Delete" method="post">
+        
+        <div class="form-group">
+            <label for="numeroCliente">Número do Cliente:</label>
+            <input type="text" class="form-control" id="numeroCliente" name="numeroCliente">
+        </div>
+        <button type="submit" class="btn btn-danger">Excluir Cliente</button>
+    </form>
+
+    <br />
 
     <h2>Clientes Cadastrados:</h2>
     <table class="table">
