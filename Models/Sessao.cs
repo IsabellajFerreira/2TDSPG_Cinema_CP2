@@ -36,5 +36,5 @@ namespace _2TDSPG_Cinema.Models
             IngressosDisponiveis = ingressosDisponiveis;
             Sala = sala;
         }
-        }
+    }
 }

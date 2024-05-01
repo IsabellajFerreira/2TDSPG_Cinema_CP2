@@ -10,12 +10,16 @@
   <ItemGroup>
     <Compile Remove="Views\Cinema\**" />
     <Compile Remove="Views\SalaView\**" />
+    <Compile Remove="Views\Sala\**" />
     <Content Remove="Views\Cinema\**" />
     <Content Remove="Views\SalaView\**" />
+    <Content Remove="Views\Sala\**" />
     <EmbeddedResource Remove="Views\Cinema\**" />
     <EmbeddedResource Remove="Views\SalaView\**" />
+    <EmbeddedResource Remove="Views\Sala\**" />
     <None Remove="Views\Cinema\**" />
     <None Remove="Views\SalaView\**" />
+    <None Remove="Views\Sala\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +28,6 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\Cinema.cshtml" />
-    <Content Remove="Views\Sala\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,68 @@
+﻿@model List<_2TDSPG_Cinema.Models.Filme>
+@{
+    ViewData["Title"] = "Filmes";
+}
+<h2>Gerenciamento de Filmes</h2>
+<div class="text-center">
+    <h2>Adicionar Novo Filme:</h2>
+    <form asp-controller="Filme" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" class="form-control" id="titulo" name="titulo">
+        </div>
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <input type="text" class="form-control" id="descricao" name="descricao">
+        </div>
+        <div class="form-group">
+            <label for="diretor">Diretor:</label>
+            <input type="text" class="form-control" id="diretor" name="diretor">
+        </div>
+        <div class="form-group">
+            <label for="duracao">Duração (minutos):</label>
+            <input type="number" class="form-control" id="duracao" name="duracao">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Filme</button>
+    </form>
+    <br />
+    <h2>Excluir Filme:</h2>
+    <form asp-controller="Filme" asp-action="Delete" method="post">
+        <div class="form-group">
+            <label for="id">ID do Filme:</label>
+            <input type="number" class="form-control" id="id" name="id">
+        </div>
+        <button type="submit" class="btn btn-danger">Excluir Filme</button>
+    </form>
+    <br />
+    <h2>Filmes Cadastrados:</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Diretor</th>
+                <th>Duração (minutos)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var filme in (Model ?? new List<_2TDSPG_Cinema.Models.Filme>()))
+            {
+                <tr>
+                    <td>@filme.Id</td>
+                    <td>@filme.Titulo</td>
+                    <td>@filme.Descricao</td>
+                    <td>@filme.Diretor</td>
+                    <td>@filme.Duracao</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+

@@ -1,0 +1,51 @@
+﻿@model List<_2TDSPG_Cinema.Models.Ingresso>
+@{
+    ViewData["Title"] = "Ingressos";
+}
+<h2>Bem-vindo ao Cinema</h2>
+<p>Aqui você pode encontrar informações sobre ingressos disponíveis:</p>
+<div class="text-center">
+    <h2>Adicionar Novo Ingresso:</h2>
+    <form asp-controller="Ingresso" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="valor">Valor do Ingresso:</label>
+            <input type="number" class="form-control" id="valor" name="valor">
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Ingresso</button>
+    </form>
+    <br />
+    <h2>Excluir Ingresso:</h2>
+    <form asp-controller="Ingresso" asp-action="Delete" method="post">
+        <div class="form-group">
+            <label for="id">ID do Ingresso:</label>
+            <input type="number" class="form-control" id="id" name="id">
+        </div>
+        <button type="submit" class="btn btn-danger">Excluir Ingresso</button>
+    </form>
+    <br />
+    <h2>Ingressos Cadastrados:</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ingresso in (Model ?? new List<_2TDSPG_Cinema.Models.Ingresso>()))
+            {
+                <tr>
+                    <td>@ingresso.Id</td>
+                    <td>@ingresso.Valor</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (TempData["Mensagem"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Mensagem"]
+        </div>
+    }
+</div>
+
