@@ -1,28 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using _2TDSPG_Cinema.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using _2TDSPG_Cinema.Data;
+using _2TDSPG_Cinema.Models;
 
 namespace _2TDSPG_Cinema.Controllers
 {
-    public class ClienteController : Controller
+    public class SalasController : Controller
     {
         private readonly DataContext _context;
 
-        public ClienteController(DataContext context)
+        public SalasController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Cliente
+        // GET: Salas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Clientes.ToListAsync());
+            return View(await _context.Salas.ToListAsync());
         }
 
-        // GET: Cliente/Details/5
+        // GET: Salas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,36 +33,39 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(m => m.Id == id);
-            if (cliente == null)
+            var sala = await _context.Salas
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (sala == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(sala);
         }
 
-        // GET: Cliente/Create
+        // GET: Salas/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Cliente/Create
+        // POST: Salas/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Endereco,NumeroCliente")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Numero,Capacidade")] Sala sala)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cliente);
+                _context.Add(sala);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(sala);
         }
 
-        // GET: Cliente/Edit/5
+        // GET: Salas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,20 +73,22 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
+            var sala = await _context.Salas.FindAsync(id);
+            if (sala == null)
             {
                 return NotFound();
             }
-            return View(cliente);
+            return View(sala);
         }
 
-        // POST: Cliente/Edit/5
+        // POST: Salas/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,Endereco,NumeroCliente")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Numero,Capacidade")] Sala sala)
         {
-            if (id != cliente.Id)
+            if (id != sala.Id)
             {
                 return NotFound();
             }
@@ -89,12 +97,12 @@ namespace _2TDSPG_Cinema.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
+                    _context.Update(sala);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
+                    if (!SalaExists(sala.Id))
                     {
                         return NotFound();
                     }
@@ -105,10 +113,10 @@ namespace _2TDSPG_Cinema.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(sala);
         }
 
-        // GET: Cliente/Delete/5
+        // GET: Salas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,31 +124,34 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(m => m.Id == id);
-            if (cliente == null)
+            var sala = await _context.Salas
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (sala == null)
             {
                 return NotFound();
             }
 
-            return View(cliente);
+            return View(sala);
         }
 
-        // POST: Cliente/Delete/5
+        // POST: Salas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
-            _context.Clientes.Remove(cliente);
+            var sala = await _context.Salas.FindAsync(id);
+            if (sala != null)
+            {
+                _context.Salas.Remove(sala);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(int id)
+        private bool SalaExists(int id)
         {
-            return _context.Clientes.Any(e => e.Id == id);
+            return _context.Salas.Any(e => e.Id == id);
         }
-
-        
     }
 }

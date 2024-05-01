@@ -4,72 +4,7 @@
 }
 <h2>Bem-vindo ao Cinema</h2>
 <p>Aqui você pode encontrar informações sobre as salas disponíveis:</p>
-<div class="text-center">
-    <table class="table">
-        <thead>
-        </thead>
-        <tbody>
-            @foreach (var sala in (Model ?? new List<_2TDSPG_Cinema.Models.Sala>()))
-            {
-                <tr>
-                    <td>@sala.Numero</td>
-                    <td>@sala.Capacidade</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <h2>Adicionar Nova Sala:</h2>
-    <form asp-controller="Sala" asp-action="Create" method="post">
-        <div class="form-group">
-            <label for="numero">Número da Sala:</label>
-            <input type="number" class="form-control" id="numero" name="numero">
-        </div>
-        <div class="form-group">
-            <label for="capacidade">Capacidade da Sala:</label>
-            <input type="number" class="form-control" id="capacidade" name="capacidade">
-        </div>
-        <button type="submit" class="btn btn-primary">Adicionar Sala</button>
-    </form>
 
-    <br />
-
-    <h2>Excluir Sala:</h2>
-    <form asp-controller="Sala" asp-action="Delete" method="post">
-        <div class="form-group">
-            <label for="numeroExcluir">Número da Sala:</label>
-            <input type="number" class="form-control" id="numeroExcluir" name="numeroExcluir">
-        </div>
-        
-        <button type="submit" class="btn btn-danger">Excluir Sala</button>
-    </form>
-
-    <br />
-
-    <h2>Salas Cadastradas:</h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Número</th>
-                <th>Capacidade</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var sala in (Model ?? new List<_2TDSPG_Cinema.Models.Sala>()))
-            {
-                <tr>
-                    <td>@sala.Numero</td>
-                    <td>@sala.Capacidade</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    @if (TempData["Mensagem"] != null)
-    {
-        <div class="alert alert-success" role="alert">
-            @TempData["Mensagem"]
-        </div>
-    }
 </div>
 
 

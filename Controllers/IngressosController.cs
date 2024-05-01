@@ -1,28 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using _2TDSPG_Cinema.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using _2TDSPG_Cinema.Data;
+using _2TDSPG_Cinema.Models;
 
 namespace _2TDSPG_Cinema.Controllers
 {
-    public class FilmeController : Controller
+    public class IngressosController : Controller
     {
         private readonly DataContext _context;
 
-        public FilmeController(DataContext context)
+        public IngressosController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Filme
+        // GET: Ingressos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Filmes.ToListAsync());
+            return View(await _context.Ingressos.ToListAsync());
         }
 
-        // GET: Filme/Details/5
+        // GET: Ingressos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,36 +33,39 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var filme = await _context.Filmes.FirstOrDefaultAsync(m => m.Id == id);
-            if (filme == null)
+            var ingresso = await _context.Ingressos
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (ingresso == null)
             {
                 return NotFound();
             }
 
-            return View(filme);
+            return View(ingresso);
         }
 
-        // GET: Filme/Create
+        // GET: Ingressos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Filme/Create
+        // POST: Ingressos/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Titulo,Descricao,Diretor,Duracao")] Filme filme)
+        public async Task<IActionResult> Create([Bind("Id,Valor")] Ingresso ingresso)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(filme);
+                _context.Add(ingresso);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(filme);
+            return View(ingresso);
         }
 
-        // GET: Filme/Edit/5
+        // GET: Ingressos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,20 +73,22 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var filme = await _context.Filmes.FindAsync(id);
-            if (filme == null)
+            var ingresso = await _context.Ingressos.FindAsync(id);
+            if (ingresso == null)
             {
                 return NotFound();
             }
-            return View(filme);
+            return View(ingresso);
         }
 
-        // POST: Filme/Edit/5
+        // POST: Ingressos/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Titulo,Descricao,Diretor,Duracao")] Filme filme)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor")] Ingresso ingresso)
         {
-            if (id != filme.Id)
+            if (id != ingresso.Id)
             {
                 return NotFound();
             }
@@ -89,12 +97,12 @@ namespace _2TDSPG_Cinema.Controllers
             {
                 try
                 {
-                    _context.Update(filme);
+                    _context.Update(ingresso);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FilmeExists(filme.Id))
+                    if (!IngressoExists(ingresso.Id))
                     {
                         return NotFound();
                     }
@@ -105,10 +113,10 @@ namespace _2TDSPG_Cinema.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(filme);
+            return View(ingresso);
         }
 
-        // GET: Filme/Delete/5
+        // GET: Ingressos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,29 +124,34 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var filme = await _context.Filmes.FirstOrDefaultAsync(m => m.Id == id);
-            if (filme == null)
+            var ingresso = await _context.Ingressos
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (ingresso == null)
             {
                 return NotFound();
             }
 
-            return View(filme);
+            return View(ingresso);
         }
 
-        // POST: Filme/Delete/5
+        // POST: Ingressos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var filme = await _context.Filmes.FindAsync(id);
-            _context.Filmes.Remove(filme);
+            var ingresso = await _context.Ingressos.FindAsync(id);
+            if (ingresso != null)
+            {
+                _context.Ingressos.Remove(ingresso);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FilmeExists(int id)
+        private bool IngressoExists(int id)
         {
-            return _context.Filmes.Any(e => e.Id == id);
+            return _context.Ingressos.Any(e => e.Id == id);
         }
     }
 }

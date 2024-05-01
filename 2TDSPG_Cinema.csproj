@@ -28,6 +28,10 @@
 
   <ItemGroup>
     <Content Remove="Views\Home\Cinema.cshtml" />
+    <Content Remove="Views\Home\CinemaView.cshtml" />
+    <Content Remove="Views\Home\Filme.cshtml" />
+    <Content Remove="Views\Home\Ingresso.cshtml" />
+    <Content Remove="Views\Home\Privacy.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +41,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="Oracle.EntityFrameworkCore" Version="8.21.140" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>

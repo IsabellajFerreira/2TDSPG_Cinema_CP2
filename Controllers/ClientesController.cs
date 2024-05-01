@@ -1,28 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using _2TDSPG_Cinema.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using _2TDSPG_Cinema.Data;
+using _2TDSPG_Cinema.Models;
 
 namespace _2TDSPG_Cinema.Controllers
 {
-    public class IngressoController : Controller
+    public class ClientesController : Controller
     {
         private readonly DataContext _context;
 
-        public IngressoController(DataContext context)
+        public ClientesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: Ingresso
+        // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ingressos.ToListAsync());
+            return View(await _context.Clientes.ToListAsync());
         }
 
-        // GET: Ingresso/Details/5
+        // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,36 +33,39 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var ingresso = await _context.Ingressos.FirstOrDefaultAsync(m => m.Id == id);
-            if (ingresso == null)
+            var cliente = await _context.Clientes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return View(ingresso);
+            return View(cliente);
         }
 
-        // GET: Ingresso/Create
+        // GET: Clientes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Ingresso/Create
+        // POST: Clientes/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Valor")] Ingresso ingresso)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,NumeroCliente")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ingresso);
+                _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ingresso);
+            return View(cliente);
         }
 
-        // GET: Ingresso/Edit/5
+        // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -67,20 +73,22 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var ingresso = await _context.Ingressos.FindAsync(id);
-            if (ingresso == null)
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente == null)
             {
                 return NotFound();
             }
-            return View(ingresso);
+            return View(cliente);
         }
 
-        // POST: Ingresso/Edit/5
+        // POST: Clientes/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Valor")] Ingresso ingresso)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Idade,NumeroCliente")] Cliente cliente)
         {
-            if (id != ingresso.Id)
+            if (id != cliente.Id)
             {
                 return NotFound();
             }
@@ -89,12 +97,12 @@ namespace _2TDSPG_Cinema.Controllers
             {
                 try
                 {
-                    _context.Update(ingresso);
+                    _context.Update(cliente);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IngressoExists(ingresso.Id))
+                    if (!ClienteExists(cliente.Id))
                     {
                         return NotFound();
                     }
@@ -105,10 +113,10 @@ namespace _2TDSPG_Cinema.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ingresso);
+            return View(cliente);
         }
 
-        // GET: Ingresso/Delete/5
+        // GET: Clientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -116,29 +124,34 @@ namespace _2TDSPG_Cinema.Controllers
                 return NotFound();
             }
 
-            var ingresso = await _context.Ingressos.FirstOrDefaultAsync(m => m.Id == id);
-            if (ingresso == null)
+            var cliente = await _context.Clientes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (cliente == null)
             {
                 return NotFound();
             }
 
-            return View(ingresso);
+            return View(cliente);
         }
 
-        // POST: Ingresso/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ingresso = await _context.Ingressos.FindAsync(id);
-            _context.Ingressos.Remove(ingresso);
+            var cliente = await _context.Clientes.FindAsync(id);
+            if (cliente != null)
+            {
+                _context.Clientes.Remove(cliente);
+            }
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IngressoExists(int id)
+        private bool ClienteExists(int id)
         {
-            return _context.Ingressos.Any(e => e.Id == id);
+            return _context.Clientes.Any(e => e.Id == id);
         }
     }
 }
